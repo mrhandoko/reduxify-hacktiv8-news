@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
+
 import logo from './logo.svg';
 import './App.css';
 import Search from './components/Search'
@@ -47,7 +48,7 @@ class App extends Component {
           <Link to="/people">People</Link>
         </nav>
         <Search handleTextChange={(event) => this.changeKeyword(event)}/>
-        <NewsList handleKeyword={this.state.key7word} data={this.state.data} />
+        <NewsList handleKeyword={this.state.keyword} data={this.state.data} />
       </div>
     );
   }
