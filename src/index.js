@@ -12,7 +12,7 @@ import reducer from './reducers'
 const store = createStore(reducer)
 
 ReactDOM.render(
-  <Provider>
+  <Provider store={store}>
     <Router>
       <div>
         <Route exact path="/" component={App} />

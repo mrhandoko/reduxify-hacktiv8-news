@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-
+import { connect } from 'react-redux'
 
 import logo from './logo.svg';
 import './App.css';
 import Search from './components/Search'
 import NewsList from './components/NewsList'
+import loadNewsAction from './actions'
 
 class App extends Component {
   constructor () {
@@ -18,15 +19,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const self = this
 
-    fetch('https://hn.algolia.com/api/v1/search?query=redux').then((response) => {
-      return response.json()
-    }).then((data) => {
-      self.setState({
-        data: data.hits
-      })
-    })
+
   }
 
   changeKeyword(event) {
@@ -48,10 +42,16 @@ class App extends Component {
           <Link to="/people">People</Link>
         </nav>
         <Search handleTextChange={(event) => this.changeKeyword(event)}/>
-        <NewsList handleKeyword={this.state.keyword} data={this.state.data} />
+        <NewsList />
       </div>
     );
   }
 }
 
-export default App;
+let mapDispatchToProps = (dispatch) => {
+  return {
+    getNews: dispatch(loadNewsAction())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App)
