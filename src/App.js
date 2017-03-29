@@ -38,7 +38,6 @@ class App extends Component {
         </div>
         <nav>
           <Link to="/">News</Link>
-          &nbsp;
           <Link to="/people">People</Link>
         </nav>
         <Search handleTextChange={(event) => this.changeKeyword(event)}/>
