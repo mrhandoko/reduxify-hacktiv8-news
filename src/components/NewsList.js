@@ -1,30 +1,41 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const NewsList = (props) => {
-  // const filteredData = props.data.filter((item, index) => {
-  //   let pattern = new RegExp(props.handleKeyword, 'gi')
-  //   return pattern.test(item.title)
-  // })
-  // console.log(props);
-  return (
-    <div>
-      {props.data.length === 0 && <h1>Loading</h1>}
-      <ul>
-      {
-        props.data.map((item, index) => (
-          <li key={index}>{item.title}</li>
-        ))
-      }
-      </ul>
-    </div>
-  )
+import { fetchNews, getNewsFilter } from '../actions'
+import styles from './NewsList.style';
+
+class NewsList extends React.Component {
+  componentDidMount() {
+    this.props.fetchNews()
+  }
+
+  render() {
+    return (
+      <div>
+        {this.props.news.length === 0  && <h1>Loading</h1>}
+        <ul>
+        {
+          this.props.news.map((item, index) => (
+            <li key={index} style={styles.items}><a href={item.url}>{item.title}</a></li>
+          ))
+        }
+        </ul>
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    data: state.data
+    news: state.news.filteredNews
   }
 }
 
-export default connect(mapStateToProps, null)(NewsList)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchNews: () => dispatch(fetchNews()),
+    getNewsFilter: (result) => dispatch(getNewsFilter(result))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsList)

@@ -1,5 +1,4 @@
-const loadNewsAction = () => ({
-    type: 'LOAD_NEWS'
-})
+import { loadNewsAction, fetchNews,  getFilterNews, tes } from './newsActionCreator'
+import { loadPeopleAction, fetchPeople } from './peopleActionCreator'
 
-export default loadNewsAction
+export { loadNewsAction, fetchNews,  getFilterNews, loadPeopleAction, fetchPeople }
